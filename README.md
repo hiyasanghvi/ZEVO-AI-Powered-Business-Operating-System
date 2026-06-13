@@ -1,130 +1,254 @@
-# ZEVO - Business Management OS
+# ZEVO
 
-ZEVO is a full-stack business management MVP for owners who need one place to manage businesses, income, expenses, customers, employees, bills, reminders, checklists, khata, inventory, notifications, analytics, invoice previews, and smart assistant suggestions.
+### AI-Powered Business Operating System
 
-## Tech Stack
+ZEVO is a full-stack SaaS platform designed to help small and medium businesses manage their operations from a single workspace.
 
-- Frontend: React, Vite, Tailwind CSS, React Router, Recharts, Framer Motion, React Icons
-- Backend: Node.js, Express, MySQL, JWT, bcryptjs, express-validator
-- Architecture: routes, controllers, services, repositories, middlewares, validators
+It combines business management, finance tracking, customer relationship management, inventory control, billing, digital ledger management, analytics, and AI-powered business assistance into one unified operating system.
 
-## Main Features
+**Live Application:** https://zevo-ai-powered-business-operating.vercel.app
 
-- Authentication with JWT login, register, protected profile, and role support
-- Business ownership checks so users can only access their own business data
-- Business, income, expense, customer, employee, bill, reminder, checklist, notification, khata, inventory, analytics, invoice, and AI assistant modules
-- Dashboard with stats, charts, quick actions, and business switching
-- Customer khata with credit, debit, and running balance summaries
-- Inventory with add, edit, delete, SKU, quantity, and low-stock alerts
-- Notification center with persistent mark-read, mark-all-read, and delete actions
-- Invoice preview with print/save-as-PDF flow and downloadable invoice HTML
-- Rule-based AI assistant suggestions from analytics, reminders, and inventory signals
+---
 
-## Project Structure
+## Overview
 
-```text
-client/
-  src/
-    components/
-    context/
-    hooks/
-    layouts/
-    pages/
-    routes/
-    services/
-server/
-  src/
-    controllers/
-    middlewares/
-    repositories/
-    routes/
-    services/
-    validators/
-database/
-  schema.sql
-```
+Most small businesses rely on multiple disconnected tools for accounting, customer management, inventory tracking, invoicing, reminders, and reporting.
 
-## Setup
+ZEVO solves this by providing a centralized business operating platform where all business data flows through a single system.
 
-Install dependencies:
+The platform supports multiple businesses, role-based access, financial analytics, inventory-aware billing, customer ledgers, operational workflows, and AI-assisted decision making.
 
-```bash
-cd server
-npm install
+---
 
-cd ../client
-npm install
-```
+## Key Capabilities
 
-Create `server/.env`:
+### Business Workspace Management
 
-```env
-PORT=5000
-DB_HOST=localhost
-DB_USER=root
-DB_PASSWORD=your_mysql_password
-DB_NAME=zevo_db
-JWT_SECRET=replace_with_a_long_secret
-```
+* Multi-business architecture
+* Workspace switching
+* Owner-based data isolation
+* Secure business ownership validation
 
-Import the database schema:
+### Financial Operations
 
-```bash
-mysql -u root -p < database/schema.sql
-```
+* Income management
+* Expense management
+* Revenue tracking
+* Profit calculation
+* Financial dashboards
 
-Run the backend:
+### Customer Management
 
-```bash
-cd server
-npm run dev
-```
+* Customer database
+* Contact management
+* Customer history
+* Business-linked customer records
 
-Run the frontend:
+### Digital Khata System
 
-```bash
-cd client
-npm run dev
-```
+* Credit entries
+* Debit entries
+* Running balances
+* Ledger history
+* Customer account tracking
 
-Frontend runs on Vite, usually `http://localhost:5173`. Backend runs on `http://localhost:5000` by default.
+### Inventory Management
 
-## Important API Areas
+* Product catalog
+* Stock monitoring
+* SKU support
+* Purchase pricing
+* Selling pricing
+* Unit tracking
 
-- `POST /api/auth/register`
-- `POST /api/auth/login`
-- `GET /api/auth/profile`
-- `GET /api/dashboard/:businessId`
-- `GET /api/analytics/:businessId`
-- `GET /api/khata/business/:businessId`
-- `GET /api/invoices/:billId/pdf-data`
-- `GET /api/inventory/:businessId`
-- `GET /api/ai-assistant/:businessId/suggestions`
-- `GET /api/notifications/me`
-- `PATCH /api/notifications/:id/read`
-- `PATCH /api/notifications/read-all`
-- `DELETE /api/notifications/:id`
+### Billing & Invoicing
 
-## Frontend Pages
+* Invoice generation
+* Multi-item billing
+* Inventory integration
+* Automatic calculations
+* Customer-linked invoices
 
-- `/dashboard`
-- `/businesses`
-- `/income`
-- `/expenses`
-- `/customers`
-- `/employees`
-- `/bills`
-- `/reminders`
-- `/checklists`
-- `/analytics`
-- `/khata`
-- `/notifications`
-- `/invoice-pdf`
-- `/inventory`
-- `/ai-assistant`
+### Employee Management
 
-## Current Notes
+* Employee onboarding
+* Business assignment
+* Role management
+* Secure access control
 
-The app is designed as a demoable SaaS MVP. Most modules are connected through the shared Axios API layer in `client/src/services/module.service.js`, and the backend follows the same layered pattern for maintainability.
+### Operational Management
 
-For invoice PDF, use the `Print / Save PDF` action in the browser print dialog. The download action saves a clean invoice HTML file that can be opened or printed later.
+* Reminders
+* Checklists
+* Task tracking
+* Notification system
+
+### AI Business Assistant
+
+Powered by Groq LLM.
+
+Provides:
+
+* Business insights
+* Revenue recommendations
+* Expense optimization suggestions
+* General business guidance
+
+---
+
+# Architecture
+
+ZEVO follows a layered backend architecture commonly used in production systems.
+
+Request
+
+↓
+
+Route Layer
+
+↓
+
+Controller Layer
+
+↓
+
+Service Layer
+
+↓
+
+Repository Layer
+
+↓
+
+MySQL Database
+
+This separation ensures:
+
+* Maintainability
+* Scalability
+* Testability
+* Clear responsibility boundaries
+
+---
+
+# Security Design
+
+The platform was built with security as a first-class concern.
+
+Implemented protections include:
+
+* JWT Authentication
+* Password Hashing (bcrypt)
+* Protected APIs
+* Ownership Verification
+* Role-Based Authorization
+* Validation Middleware
+* Centralized Error Handling
+
+Every business resource is validated against the authenticated user before access is granted.
+
+---
+
+# Technology Stack
+
+## Frontend
+
+* React
+* Vite
+* Tailwind CSS
+* Framer Motion
+* React Router
+* Axios
+* Recharts
+
+## Backend
+
+* Node.js
+* Express.js
+* MySQL
+* JWT
+* bcryptjs
+* Express Validator
+
+## AI
+
+* Groq API
+* Llama Models
+
+## Deployment
+
+* Vercel
+* Render
+* Clever Cloud MySQL
+
+---
+
+# Database Design
+
+ZEVO uses a relational MySQL architecture built around business ownership.
+
+Core entities include:
+
+* Users
+* Businesses
+* Employees
+* Customers
+* Ledger Entries
+* Income
+* Expenses
+* Inventory
+* Bills
+* Bill Items
+* Reminders
+* Notifications
+* Checklists
+
+The schema supports multi-business isolation while maintaining referential integrity through foreign key relationships.
+
+---
+
+# Engineering Highlights
+
+Unlike typical CRUD projects, ZEVO includes:
+
+* Multi-tenant business architecture
+* Repository pattern implementation
+* Service layer abstraction
+* Business ownership validation
+* Inventory-aware billing
+* Digital ledger system
+* AI integration
+* Production deployment pipeline
+* Full-stack SaaS architecture
+
+---
+
+# Deployment
+
+Frontend
+
+https://zevo-ai-powered-business-operating.vercel.app
+
+Backend
+
+https://zevo-backend-1sp6.onrender.com
+
+---
+
+# Future Roadmap
+
+* Advanced analytics
+* Automated notifications
+* AI-powered forecasting
+* POS billing system
+* Mobile application
+* Team collaboration features
+* Business intelligence dashboards
+
+---
+
+# Developer
+
+Hiya Sanghvi
+
+ZEVO was built as an end-to-end SaaS platform demonstrating full-stack engineering, system design, secure backend architecture, relational database modeling, and AI integration.
